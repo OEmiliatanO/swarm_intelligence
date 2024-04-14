@@ -1,6 +1,7 @@
 import numpy as np
 from random import randint, random
 import matplotlib.pyplot as plt
+import matplotlib.animation as animation
 from src import test_function as tfn
 import sys
 
@@ -23,14 +24,14 @@ contour = plt.contour(X, Y, Z)
 #plt.clabel(contour, inline = True)
 plt.colorbar(contour, label=f'{func_str_table[fn]} Function Value')
 
-with open(f"{func_str_table[fn]}_path.txt") as f:
+with open(f"plot/{func_str_table[fn]}/{func_str_table[fn]}_path.txt") as f:
     N, D, k = [int(x) for x in f.readline().strip().split(' ')]
-    X = [[] for i in range(N)]
-    V = [[] for i in range(N)]
+    pX = [[] for i in range(N)]
+    gbest = []
     for it in range(k):
         for i in range(N):
-            X[i].append([float(x) for x in f.readline().strip().split(' ')])
-            V[i].append([float(v) for v in f.readline().strip().split(' ')])
+            pX[i].append([float(x) for x in f.readline().strip().split(' ')])
+        gbest.append(min([tfn.function_table[fn]([pX[i][it][0], pX[i][it][1]]) for i in range(N)]))
 
     for i in range(10):
         r = randint(0, 255)
@@ -38,12 +39,47 @@ with open(f"{func_str_table[fn]}_path.txt") as f:
         b = randint(0, 255)
         c = "#{:02x}{:02x}{:02x}".format(r, g, b)
         for it in range(k):
-            plt.scatter(X[i][it][0], X[i][it][1], c=c, s=3, zorder=5)
+            plt.scatter(pX[i][it][0], pX[i][it][1], c=c, s=3, zorder=5)
             if it > 0:
-                plt.plot([X[i][it-1][0], X[i][it][0]], [X[i][it-1][1], X[i][it][1]], c=c, linestyle='--', linewidth=1)
+                plt.plot([pX[i][it-1][0], pX[i][it][0]], [pX[i][it-1][1], pX[i][it][1]], c=c, linestyle='--', linewidth=1)
 
 plt.title('PSO Particle Path')
 plt.xlabel('X')
 plt.ylabel('Y')
 plt.grid(True)
-plt.savefig(f'{func_str_table[fn]}_pso_plot.png')
+print(f"save to plot/{func_str_table[fn]}/{func_str_table[fn]}_pso_plot.png")
+plt.savefig(f'plot/{func_str_table[fn]}/{func_str_table[fn]}_pso_plot.png')
+plt.close()
+
+plt.figure()
+plt.xlabel('iteration')
+plt.ylabel('value')
+iteration = [i for i in range(k)]
+plt.plot(iteration, gbest)
+print(f"save to plot/{func_str_table[fn]}/{func_str_table[fn]}_pso_convergence.png")
+plt.savefig(f'plot/{func_str_table[fn]}/{func_str_table[fn]}_pso_convergence.png')
+plt.close()
+
+fig, ax = plt.subplots()
+ax.contour(X, Y, Z)
+ax.set_xlim(search_range[fn][0], search_range[fn][1])
+ax.set_ylim(search_range[fn][0], search_range[fn][1])
+
+points = []
+for i in range(10):
+    points.append(ax.scatter(pX[i][0][0], pX[i][0][1]))
+
+def update_scatter(frame):
+    it = frame
+    ax.set_title('iter = ' + str(it))
+    for i in range(10):
+        points[i].set_offsets((pX[i][it][0], pX[i][it][1]))
+    return tuple(points)
+
+ani = animation.FuncAnimation(fig, update_scatter, frames=k, interval=200)
+writer = animation.PillowWriter(fps=15,
+                                metadata=dict(artist='Me'),
+                                bitrate=1800)
+
+print(f"save to plot/{func_str_table[fn]}/{func_str_table[fn]}_pso_path.gif")
+ani.save(f'plot/{func_str_table[fn]}/{func_str_table[fn]}_pso_path.gif', writer=writer)

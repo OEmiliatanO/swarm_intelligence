@@ -1,5 +1,7 @@
 #!/bin/bash
 
+make record all
+
 if [ "$1" == "Ackley" ] || [ "$1" == "1" ]
 then
     echo "Ackley"
@@ -28,6 +30,31 @@ then
 elif [ "$1" == "Michalewicz" ] || [ "$1" == "6" ]
 then
     echo "Michalewicz"
-    ./main.elf --N 1000 --D 2 --k 50 --vmax 0.1 --c1 2 --c2 0.2 --test_function 6  > /dev/null
+    ./main.elf --N 1000 --D 2 --k 100 --vmax 0.1 --c1 2 --c2 0.2 --test_function 6  > /dev/null
+    python plot.py 6
+elif [ "$1" == "all" ] || [ "$1" == "-1" ]
+then
+    echo "Ackley"
+    ./main.elf --N 1000 --D 2 --k 100 --vmax 0.5 --c1 2 --c2 1 --test_function 1  > /dev/null
+    python plot.py 1
+    
+    echo "Rastrigin"
+    ./main.elf --N 1000 --D 2 --k 100 --vmax 1 --c1 2 --c2 0.2 --test_function 2  > /dev/null
+    python plot.py 2
+    
+    echo "HappyCat"
+    ./main.elf --N 1000 --D 2 --k 100 --vmax 1 --c1 2 --c2 0.2 --test_function 3  > /dev/null
+    python plot.py 3
+    
+    echo "Rosenbrock"
+    ./main.elf --N 1000 --D 2 --k 100 --vmax 1 --c1 2 --c2 0.2 --test_function 4  > /dev/null
+    python plot.py 4
+    
+    echo "Zakharov"
+    ./main.elf --N 1000 --D 2 --k 100 --vmax 1 --c1 2 --c2 0.2 --test_function 5  > /dev/null
+    python plot.py 5
+
+    echo "Michalewicz"
+    ./main.elf --N 1000 --D 2 --k 100 --vmax 0.1 --c1 2 --c2 0.2 --test_function 6  > /dev/null
     python plot.py 6
 fi

@@ -12,7 +12,7 @@ double (*test_func)(const CH::vector<double>& X);
 
 std::string table[] = {"0", "Ackley", "Rastrigin", "HappyCat", "Rosenbrock", "Zakharov", "Michalewicz"};
 
-double PSO(size_t N, size_t D, size_t k,[[maybe_unused]] double vmax, double c1, double c2, double xl, double xu, double vl = 0.001, double vu = 1, int fn = 1)
+double PSO(size_t N, size_t D, size_t k, double vmax, double c1, double c2, double xl, double xu, double vl = 0.001, double vu = 1,[[maybe_unused]] int fn = 1)
 {
     /*
      N D k
@@ -35,9 +35,11 @@ double PSO(size_t N, size_t D, size_t k,[[maybe_unused]] double vmax, double c1,
      xN1 xN2 xN3 ... xND    |
      vN1 vN2 vN3 ... vND  --/
      */
+#ifdef SAVE
     std::fstream fs;
-    fs.open(std::format("{}_path.txt", table[fn]), std::ios::out);
+    fs.open(std::format("plot/{}/{}_path.txt", table[fn], table[fn]), std::ios::out);
     fs << std::format("{} {} {}", N, D, k) << std::endl;
+#endif
 
     constexpr double omega_max = 0.9, omega_min = 0.4;
 
@@ -62,7 +64,9 @@ double PSO(size_t N, size_t D, size_t k,[[maybe_unused]] double vmax, double c1,
         std::generate(X[i].begin(), X[i].end(), [&] { return Xdist(eng); });
         std::generate(V[i].begin(), V[i].end(), [&] { return Vdist(eng); });
 
+#ifdef SAVE
         fs << X[i] << '\n' << V[i] << std::endl;
+#endif
 
         pbest[i] = X[i];
         fpbest[i] = test_func(X[i]);
@@ -100,12 +104,17 @@ double PSO(size_t N, size_t D, size_t k,[[maybe_unused]] double vmax, double c1,
                 fgbest = fxi;
                 gbest = X[i];
             }
+#ifdef SAVE
             fs << X[i] << '\n' << V[i] << std::endl;
+#endif
         }
 
         omega = omega_max - (omega_max - omega_min) * iter / k;
     }
     /*  iteration */
+#ifdef SAVE
+    fs.close();
+#endif
     std::cout << "result: " << fgbest << std::endl;
     return fgbest;
 }
