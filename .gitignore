@@ -1,5 +1,4 @@
 *.txt
 *.elf
 *.o
-*.png
 __pycache__/
