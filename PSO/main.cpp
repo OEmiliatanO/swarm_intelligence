@@ -1,5 +1,6 @@
 #include <iostream>
 #include <format>
+#include <fstream>
 #include <cmath>
 #include <chrono>
 #include <random>
@@ -9,8 +10,35 @@
 
 double (*test_func)(const CH::vector<double>& X);
 
-double PSO(size_t N, size_t D, size_t k,[[maybe_unused]] double vmax, double c1, double c2, double xl, double xu, double vl = 0.001, double vu = 1)
+std::string table[] = {"0", "Ackley", "Rastrigin", "HappyCat", "Rosenbrock", "Zakharov", "Michalewicz"};
+
+double PSO(size_t N, size_t D, size_t k,[[maybe_unused]] double vmax, double c1, double c2, double xl, double xu, double vl = 0.001, double vu = 1, int fn = 1)
 {
+    /*
+     N D k
+     x11 x12 x13 ... x1D  --\
+     v11 v12 v13 ... v1D    |
+     ...                    | <--- 0
+     xN1 xN2 xN3 ... xND    |
+     vN1 vN2 vN3 ... vND  --/
+     x11 x12 x13 ... x1D  --\
+     v11 v12 v13 ... v1D    |
+     ...                    | <--- 1
+     xN1 xN2 xN3 ... xND    |
+     vN1 vN2 vN3 ... vND  --/
+
+     ...
+     
+     x11 x12 x13 ... x1D  --\
+     v11 v12 v13 ... v1D    |
+     ...                    | <--- k
+     xN1 xN2 xN3 ... xND    |
+     vN1 vN2 vN3 ... vND  --/
+     */
+    std::fstream fs;
+    fs.open(std::format("{}_path.txt", table[fn]), std::ios::out);
+    fs << std::format("{} {} {}", N, D, k) << std::endl;
+
     constexpr double omega_max = 0.9, omega_min = 0.4;
 
     CH::vector<double> X[N], V[N];
@@ -33,6 +61,8 @@ double PSO(size_t N, size_t D, size_t k,[[maybe_unused]] double vmax, double c1,
         V[i].resize(D);
         std::generate(X[i].begin(), X[i].end(), [&] { return Xdist(eng); });
         std::generate(V[i].begin(), V[i].end(), [&] { return Vdist(eng); });
+
+        fs << X[i] << '\n' << V[i] << std::endl;
 
         pbest[i] = X[i];
         fpbest[i] = test_func(X[i]);
@@ -70,6 +100,7 @@ double PSO(size_t N, size_t D, size_t k,[[maybe_unused]] double vmax, double c1,
                 fgbest = fxi;
                 gbest = X[i];
             }
+            fs << X[i] << '\n' << V[i] << std::endl;
         }
 
         omega = omega_max - (omega_max - omega_min) * iter / k;
@@ -133,18 +164,17 @@ int main([[maybe_unused]]int argc, char **argv)
     N = std::min(N, D * 10000 / (k+1));
     std::cerr << std::format("N = {}, D = {}, k = {}", N, D, k) << std::endl;
 
-    constexpr auto EVAL_N = 30;
+    //constexpr auto EVAL_N = 30;
     auto eval_num = EVAL_N;
     double mean = 0;
     double std = 0;
     std::chrono::duration<double> time_mean = 0ms;
     while (eval_num--)
     {
-
         double xl = 0, xu = 30, vl = 0.1, vu=1;
         set_search_bound(&xu, &xl, fn);
         auto st = std::chrono::steady_clock::now();
-        auto tmp_res = PSO(N, D, k, vmax, c1, c2, xl, xu, vl, vu);
+        auto tmp_res = PSO(N, D, k, vmax, c1, c2, xl, xu, vl, vu, fn);
         auto ed = std::chrono::steady_clock::now();
         time_mean += ed - st;
 

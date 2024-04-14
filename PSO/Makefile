@@ -7,7 +7,9 @@ HEADER_DIR:=src
 HEADER:=$(HEADER_DIR)/vector.h $(HEADER_DIR)/test_function.h
 
 dep: $(SOURCE) $(HEADER_DIR) $(HEADER)
-	$(CC) $(FLAG) -I $(HEADER_DIR) -c $(SOURCE)
+	$(CC) $(FLAG) -DEVAL_N=30 -I $(HEADER_DIR) -c $(SOURCE)
+record: $(SOURCE) $(HEADER_DIR) $(HEADER)
+	$(CC) $(FLAG) -DEVAL_N=1 -I $(HEADER_DIR) -c $(SOURCE)
 all: $(OBJ)
 	$(CC) $(OBJ) -o $(ELF)
 
