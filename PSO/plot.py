@@ -27,10 +27,12 @@ plt.colorbar(contour, label=f'{func_str_table[fn]} Function Value')
 with open(f"plot/{func_str_table[fn]}/{func_str_table[fn]}_path.txt") as f:
     N, D, k = [int(x) for x in f.readline().strip().split(' ')]
     pX = [[] for i in range(N)]
+    pV = [[] for i in range(N)]
     gbest = []
     for it in range(k):
         for i in range(N):
             pX[i].append([float(x) for x in f.readline().strip().split(' ')])
+            pV[i].append([float(x) for x in f.readline().strip().split(' ')])
         gbest.append(min([tfn.function_table[fn]([pX[i][it][0], pX[i][it][1]]) for i in range(N)]))
 
     for i in range(10):
