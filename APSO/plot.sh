@@ -35,26 +35,26 @@ then
 elif [ "$1" == "all" ] || [ "$1" == "-1" ]
 then
     echo "Ackley"
-    #./main.elf --N 1000 --D 2 --k 100 --alpha 0.15 --beta 0.5 --L 1 --test_function 1  > /dev/null
+    ./main.elf --N 1000 --D 2 --k 100 --alpha 0.15 --beta 0.5 --L 1 --test_function 1  > /dev/null
     python plot.py 1
     
     echo "Rastrigin"
-    #./main.elf --N 1000 --D 2 --k 100 --alpha 0.15 --beta 0.5 --L 1 --test_function 2  > /dev/null
+    ./main.elf --N 1000 --D 2 --k 100 --alpha 0.15 --beta 0.5 --L 1 --test_function 2  > /dev/null
     python plot.py 2
     
     echo "HappyCat"
-    #./main.elf --N 1000 --D 2 --k 100 --alpha 0.15 --beta 0.5 --L 1 --test_function 3  > /dev/null
+    ./main.elf --N 1000 --D 2 --k 100 --alpha 0.15 --beta 0.5 --L 1 --test_function 3  > /dev/null
     python plot.py 3
     
     echo "Rosenbrock"
-    #./main.elf --N 1000 --D 2 --k 100 --alpha 0.15 --beta 0.5 --L 1 --test_function 4  > /dev/null
+    ./main.elf --N 1000 --D 2 --k 100 --alpha 0.15 --beta 0.5 --L 1 --test_function 4  > /dev/null
     python plot.py 4
     
     echo "Zakharov"
-    #./main.elf --N 1000 --D 2 --k 100 --alpha 0.15 --beta 0.5 --L 1 --test_function 5  > /dev/null
+    ./main.elf --N 1000 --D 2 --k 100 --alpha 0.15 --beta 0.5 --L 1 --test_function 5  > /dev/null
     python plot.py 5
 
     echo "Michalewicz"
-    #./main.elf --N 1000 --D 2 --k 100 --alpha 0.15 --beta 0.5 --L 1 --test_function 6  > /dev/null
+    ./main.elf --N 1000 --D 2 --k 100 --alpha 0.15 --beta 0.5 --L 1 --test_function 6  > /dev/null
     python plot.py 6
 fi

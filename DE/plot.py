@@ -47,8 +47,8 @@ plt.title('PSO Particle Path')
 plt.xlabel('X')
 plt.ylabel('Y')
 plt.grid(True)
-print(f"save to plot/{func_str_table[fn]}/{func_str_table[fn]}_pso_plot.png")
-plt.savefig(f'plot/{func_str_table[fn]}/{func_str_table[fn]}_pso_plot.png')
+print(f"save to plot/{func_str_table[fn]}/{func_str_table[fn]}_de_plot.png")
+plt.savefig(f'plot/{func_str_table[fn]}/{func_str_table[fn]}_de_plot.png')
 plt.close()
 
 plt.figure()
@@ -56,8 +56,8 @@ plt.xlabel('iteration')
 plt.ylabel('value')
 iteration = [i for i in range(k)]
 plt.plot(iteration, gbest)
-print(f"save to plot/{func_str_table[fn]}/{func_str_table[fn]}_pso_convergence.png")
-plt.savefig(f'plot/{func_str_table[fn]}/{func_str_table[fn]}_pso_convergence.png')
+print(f"save to plot/{func_str_table[fn]}/{func_str_table[fn]}_de_convergence.png")
+plt.savefig(f'plot/{func_str_table[fn]}/{func_str_table[fn]}_de_convergence.png')
 plt.close()
 
 fig, ax = plt.subplots()
@@ -81,5 +81,5 @@ writer = animation.PillowWriter(fps=15,
                                 metadata=dict(artist='Me'),
                                 bitrate=1800)
 
-print(f"save to plot/{func_str_table[fn]}/{func_str_table[fn]}_pso_path.gif")
-ani.save(f'plot/{func_str_table[fn]}/{func_str_table[fn]}_pso_path.gif', writer=writer)
+print(f"save to plot/{func_str_table[fn]}/{func_str_table[fn]}_de_path.gif")
+ani.save(f'plot/{func_str_table[fn]}/{func_str_table[fn]}_de_path.gif', writer=writer)
