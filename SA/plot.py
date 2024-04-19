@@ -32,19 +32,26 @@ with open(f"plot/{func_str_table[fn]}/{func_str_table[fn]}_path.txt") as f:
         S.append([float(x) for x in f.readline().strip().split(' ')])
         gbest.append([float(x) for x in f.readline().strip().split(' ')])
 
-    S = S[k-100:]
-    gbest = gbest[k-100:]
-    k = len(S)
-
-    r = randint(0, 255)
-    g = randint(0, 255)
-    b = randint(0, 255)
+    r = 255
+    g = 0#randint(0, 255)
+    b = 0#randint(0, 255)
     c = "#{:02x}{:02x}{:02x}".format(r, g, b)
+    nowp_s = nowp = gbest[0]
+    gbest_pruned = []
+    S_pruned = []
+    gbest_pruned.append(nowp)
+    S_pruned.append(nowp_s)
+    plt.scatter(nowp[0], nowp[1], c='red', s=3, zorder=5)
     for it in range(k):
-        plt.scatter(gbest[it][0], gbest[it][1], c='red', s=3, zorder=5)
-        plt.scatter(S[it][0], S[it][1], c=c, s=3, zorder=5)
-        if it > 0:
-            plt.plot([S[it-1][0], S[it][0]], [S[it-1][1], S[it][1]], c=c, linestyle='--', linewidth=1)
+        if abs(nowp[0] - gbest[it][0]) > 1e-3 or abs(nowp[1] - gbest[it][1]) > 1e-3:
+            #plt.scatter(gbest[it][0], gbest[it][1], c='red', s=3, zorder=5)
+            #plt.plot([nowp[0], gbest[it][0]], [nowp[1], gbest[it][1]], c=c, linestyle='--', linewidth=1)
+            plt.scatter(S[it][0], S[it][1], c='red', s=3, zorder=5)
+            plt.plot([nowp_s[0], S[it][0]], [nowp_s[1], S[it][1]], c=c, linestyle='--', linewidth=1)
+            nowp = gbest[it]
+            nowp_s = S[it]
+            gbest_pruned.append(nowp)
+            S_pruned.append(nowp_s)
 
 plt.title('SA Path')
 plt.xlabel('X')
@@ -57,8 +64,8 @@ plt.close()
 plt.figure()
 plt.xlabel('iteration')
 plt.ylabel('value')
-iteration = [i for i in range(k)]
-plt.plot(iteration, gbest)
+iteration = [i for i in range(len(S))]
+plt.plot(iteration, S)
 print(f"save to plot/{func_str_table[fn]}/{func_str_table[fn]}_sa_convergence.png")
 plt.savefig(f'plot/{func_str_table[fn]}/{func_str_table[fn]}_sa_convergence.png')
 plt.close()
@@ -69,17 +76,18 @@ ax.set_xlim(search_range[fn][0], search_range[fn][1])
 ax.set_ylim(search_range[fn][0], search_range[fn][1])
 
 points = []
-for i in range(k):
-    points.append(ax.scatter(S[i][0], S[i][1]))
+#points.append(ax.scatter(gbest_pruned[0][0], gbest_pruned[0][1]))
+points.append(ax.scatter(S_pruned[0][0], S_pruned[0][1]))
 
 def update_scatter(frame):
     it = frame
     ax.set_title('iter = ' + str(it))
-    for i in range(k):
-        points[i].set_offsets((S[i][0], S[i][1]))
+    for i in range(len(points)):
+        #points[i].set_offsets((gbest_pruned[it][0], gbest_pruned[it][1]))
+        points[i].set_offsets((S_pruned[it][0], S_pruned[it][1]))
     return tuple(points)
 
-ani = animation.FuncAnimation(fig, update_scatter, frames=k, interval=200)
+ani = animation.FuncAnimation(fig, update_scatter, frames=len(S_pruned), interval=200)
 writer = animation.PillowWriter(fps=15,
                                 metadata=dict(artist='Me'),
                                 bitrate=1800)
