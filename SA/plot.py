@@ -65,7 +65,11 @@ plt.figure()
 plt.xlabel('iteration')
 plt.ylabel('value')
 iteration = [i for i in range(len(S))]
-plt.plot(iteration, S)
+value = [tfn.function_table[fn]([S[i][0], S[i][1]]) for i in range(len(S))]
+gfbest = [tfn.function_table[fn]([gbest[i][0], gbest[i][1]]) for i in range(len(S))]
+plt.plot(iteration, value, label='S')
+plt.plot(iteration, gfbest, label='global best')
+plt.legend()
 print(f"save to plot/{func_str_table[fn]}/{func_str_table[fn]}_sa_convergence.png")
 plt.savefig(f'plot/{func_str_table[fn]}/{func_str_table[fn]}_sa_convergence.png')
 plt.close()
