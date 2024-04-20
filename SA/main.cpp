@@ -163,6 +163,6 @@ int main([[maybe_unused]]int argc, char **argv)
     
     //std::cout << std::format("mean: {:.4f}±{:.4f}", mean, std) << std::endl;
 
-    std::cerr << std::format("mean: {:.4f}±{:.4f}, avg time: {}", mean, std, time_mean) << std::endl;
+    std::cerr << std::format("mean: {}±{}, avg time: {}", mean, std, time_mean) << std::endl;
     return 0;
 }
