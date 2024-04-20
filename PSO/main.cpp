@@ -41,8 +41,6 @@ double PSO(size_t N, size_t D, size_t k, double vmax, double c1, double c2, doub
     fs << std::format("{} {} {}", N, D, k) << std::endl;
 #endif
 
-    constexpr double omega_max = 0.9, omega_min = 0.4;
-
     CH::vector<double> X[N], V[N];
     CH::vector<double> pbest[N];
     double fpbest[N];
@@ -78,8 +76,6 @@ double PSO(size_t N, size_t D, size_t k, double vmax, double c1, double c2, doub
     }
     /*  init  */
 
-    double omega = omega_max;
-
     /*  iteration */
     for (size_t iter = 0; iter < k; ++iter)
     {
@@ -89,7 +85,7 @@ double PSO(size_t N, size_t D, size_t k, double vmax, double c1, double c2, doub
         std::generate(r2.begin(), r2.end(), [&] { return dist01(eng); });
         for (size_t i = 0; i < N; ++i)
         {
-            V[i] = omega * V[i] + c1 * CH::Hadamard_prod(r1, (pbest[i] - X[i])) + c2 * CH::Hadamard_prod(r2, (gbest - X[i]));
+            V[i] = V[i] + c1 * CH::Hadamard_prod(r1, (pbest[i] - X[i])) + c2 * CH::Hadamard_prod(r2, (gbest - X[i]));
             std::transform(V[i].begin(), V[i].end(), V[i].begin(), [&] (const auto& v) { return std::min(vmax, v); });
             X[i] = X[i] + V[i];
             std::transform(X[i].begin(), X[i].end(), X[i].begin(), [&] (const auto& x) { return std::max(xl, std::min(xu, x)); });
@@ -108,14 +104,12 @@ double PSO(size_t N, size_t D, size_t k, double vmax, double c1, double c2, doub
             fs << X[i] << '\n' << V[i] << std::endl;
 #endif
         }
-
-        omega = omega_max - (omega_max - omega_min) * iter / k;
     }
     /*  iteration */
 #ifdef SAVE
     fs.close();
 #endif
-    std::cout << "result: " << fgbest << std::endl;
+    std::cout << fgbest << std::endl;
     return fgbest;
 }
 
@@ -197,8 +191,8 @@ int main([[maybe_unused]]int argc, char **argv)
     std -= mean * mean;
     std = sqrt(std);
     
-    std::cout << std::format("mean: {:.4f}±{:.4f}", mean, std) << std::endl;
+    //std::cout << std::format("mean: {:.4f}±{:.4f}", mean, std) << std::endl;
 
-    std::cerr << std::format("mean: {:.4f}±{:.4f}, avg time: {}", mean, std, time_mean) << std::endl;
+    std::cerr << std::format("mean: {}±{}, avg time: {}", mean, std, time_mean) << std::endl;
     return 0;
 }
