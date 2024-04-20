@@ -90,7 +90,7 @@ double DE(size_t N, size_t D, size_t k, double m, double c, double xl, double xu
 #ifdef SAVE
     fs.close();
 #endif
-    std::cout << "result: " << fgbest << std::endl;
+    std::cout << fgbest << std::endl;
     return fgbest;
 }
 
@@ -170,8 +170,8 @@ int main([[maybe_unused]]int argc, char **argv)
     std -= mean * mean;
     std = sqrt(std);
     
-    std::cout << std::format("mean: {:.4f}±{:.4f}", mean, std) << std::endl;
+    //std::cout << std::format("mean: {:.4f}±{:.4f}", mean, std) << std::endl;
 
-    std::cerr << std::format("mean: {:.4f}±{:.4f}, avg time: {}", mean, std, time_mean) << std::endl;
+    std::cerr << std::format("mean: {}±{}, avg time: {}", mean, std, time_mean) << std::endl;
     return 0;
 }

@@ -1,31 +1,30 @@
-result: 3.55271e-15
-result: 0
-result: 3.55271e-15
-result: 0
-result: 0
-result: 7.10543e-15
-result: 3.55271e-15
-result: 0
-result: 0
-result: 0
-result: 3.55271e-15
-result: 0
-result: 0
-result: 0
-result: 0
-result: 0
-result: 0
-result: 0
-result: 0
-result: 0
-result: 0
-result: 0
-result: 0
-result: 0
-result: 0
-result: 3.55271e-15
-result: 0
-result: 3.55271e-15
-result: 0
-result: 0
-mean: 0.0000±0.0000
+0
+0
+0
+3.55271e-15
+0
+3.55271e-15
+0
+0
+0
+0
+0
+3.55271e-15
+0
+0
+0
+0
+0
+0
+3.55271e-15
+3.55271e-15
+0
+0
+0
+3.55271e-15
+0
+0
+0
+0
+0
+0
