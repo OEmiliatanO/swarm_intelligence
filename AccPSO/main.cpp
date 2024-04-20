@@ -12,7 +12,7 @@ double (*test_func)(const CH::vector<double>& X);
 
 std::string table[] = {"0", "Ackley", "Rastrigin", "HappyCat", "Rosenbrock", "Zakharov", "Michalewicz"};
 
-double PSO(size_t N, size_t D, size_t k, double xl, double xu, double _alpha, double _beta, double _L, [[maybe_unused]] int fn = 1)
+double PSO(size_t N, size_t D, size_t k, double xl, double xu, double _alpha, double _beta, double gamma, double _L, [[maybe_unused]] int fn = 1)
 {
     /*
      N D k
@@ -98,6 +98,7 @@ double PSO(size_t N, size_t D, size_t k, double xl, double xu, double _alpha, do
             fs << X[i] << std::endl;
 #endif
         }
+        alpha *= gamma;
     }
     /*  iteration */
 #ifdef SAVE
@@ -115,21 +116,22 @@ double PSO(size_t N, size_t D, size_t k, double xl, double xu, double _alpha, do
 // --L 1
 // --test_function fn
 // (k+1)*N <= D*10^4
-// ./main.elf --N 10 --D 10 --k 1 --alpha 0.5 --beta 0.5 --L 1 --test_function 1
+// ./main.elf --N 10 --D 10 --k 1 --alpha 0.5 --beta 0.5 --gamma 0.5 --L 1 --test_function 1
 int main([[maybe_unused]]int argc, char **argv)
 {
     using namespace std::chrono_literals;
 
     int N, D, k, fn;
-    double alpha, beta, L;
+    double alpha, beta, gamma, L;
 
     sscanf(argv[2], "%d", &N);
     sscanf(argv[4], "%d", &D);
     sscanf(argv[6], "%d", &k);
     sscanf(argv[8], "%lf", &alpha);
     sscanf(argv[10], "%lf", &beta);
-    sscanf(argv[12], "%lf", &L);
-    sscanf(argv[14], "%d", &fn);
+    sscanf(argv[12], "%lf", &gamma);
+    sscanf(argv[14], "%lf", &L);
+    sscanf(argv[16], "%d", &fn);
 
     switch(fn)
     {
@@ -171,7 +173,7 @@ int main([[maybe_unused]]int argc, char **argv)
         double xl = 0, xu = 30;
         set_search_bound(&xu, &xl, fn);
         auto st = std::chrono::steady_clock::now();
-        auto tmp_res = PSO(N, D, k, xl, xu, alpha, beta, L, fn);
+        auto tmp_res = PSO(N, D, k, xl, xu, alpha, beta, gamma, L, fn);
         auto ed = std::chrono::steady_clock::now();
         time_mean += ed - st;
 
