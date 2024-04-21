@@ -21,9 +21,9 @@ elif [ "$1" == "HappyCat" ] || [ "$1" == "3" ]
 then
     echo "HappyCat"
     mkdir -p result/HappyCat/
-    ./main.elf --N 1000 --D 2 --k 1000 --m 0.5 --c 0.5 --test_function 3  > result/HappyCat/HappyCat_2D.txt
-    ./main.elf --N 1000 --D 10 --k 1000 --m 0.5 --c 0.5 --test_function 3 > result/HappyCat/HappyCat_10D.txt
-    ./main.elf --N 1000 --D 30 --k 1000 --m 0.5 --c 0.5 --test_function 3 > result/HappyCat/HappyCat_30D.txt
+    ./main.elf --N 1000 --D 2 --k 400 --m 0.7 --c 0.8 --test_function 3  > result/HappyCat/HappyCat_2D.txt
+    ./main.elf --N 1000 --D 10 --k 2000 --m 0.7 --c 0.8 --test_function 3 > result/HappyCat/HappyCat_10D.txt
+    ./main.elf --N 1000 --D 30 --k 5000 --m 0.7 --c 0.8 --test_function 3 > result/HappyCat/HappyCat_30D.txt
 elif [ "$1" == "Rosenbrock" ] || [ "$1" == "4" ]
 then
     echo "Rosenbrock"
@@ -61,9 +61,9 @@ then
 
     echo "HappyCat"
     mkdir -p result/HappyCat/
-    ./main.elf --N 1000 --D 2 --k 1000 --m 0.5 --c 0.5 --test_function 3  > result/HappyCat/HappyCat_2D.txt
-    ./main.elf --N 1000 --D 10 --k 1000 --m 0.5 --c 0.5 --test_function 3 > result/HappyCat/HappyCat_10D.txt
-    ./main.elf --N 1000 --D 30 --k 1000 --m 0.5 --c 0.5 --test_function 3 > result/HappyCat/HappyCat_30D.txt
+    ./main.elf --N 1000 --D 2 --k 400 --m 0.7 --c 0.8 --test_function 3  > result/HappyCat/HappyCat_2D.txt
+    ./main.elf --N 1000 --D 10 --k 2000 --m 0.7 --c 0.8 --test_function 3 > result/HappyCat/HappyCat_10D.txt
+    ./main.elf --N 1000 --D 30 --k 5000 --m 0.7 --c 0.8 --test_function 3 > result/HappyCat/HappyCat_30D.txt
 
     echo "Rosenbrock"
     mkdir -p result/Rosenbrock/
