@@ -45,8 +45,8 @@ plt.title('multi-SA Path')
 plt.xlabel('X')
 plt.ylabel('Y')
 plt.grid(True)
-print(f"save to plot/{func_str_table[fn]}/{func_str_table[fn]}_sa_plot.png")
-plt.savefig(f'plot/{func_str_table[fn]}/{func_str_table[fn]}_sa_plot.png')
+print(f"save to plot/{func_str_table[fn]}/{func_str_table[fn]}_msa_plot.png")
+plt.savefig(f'plot/{func_str_table[fn]}/{func_str_table[fn]}_msa_plot.png')
 plt.close()
 
 plt.figure()
@@ -56,8 +56,8 @@ plt.ylabel('value')
 iteration = [i for i in range(k)]
 value = [min([tfn.function_table[fn]([S[i][it][0], S[i][it][1]]) for i in range(N)]) for it in range(k)]
 plt.plot(iteration, value)
-print(f"save to plot/{func_str_table[fn]}/{func_str_table[fn]}_sa_convergence.png")
-plt.savefig(f'plot/{func_str_table[fn]}/{func_str_table[fn]}_sa_convergence.png')
+print(f"save to plot/{func_str_table[fn]}/{func_str_table[fn]}_msa_convergence.png")
+plt.savefig(f'plot/{func_str_table[fn]}/{func_str_table[fn]}_msa_convergence.png')
 plt.close()
 
 fig, ax = plt.subplots()
@@ -81,5 +81,5 @@ writer = animation.PillowWriter(fps=15,
                                 metadata=dict(artist='Me'),
                                 bitrate=1800)
 
-print(f"save to plot/{func_str_table[fn]}/{func_str_table[fn]}_sa_path.gif")
-ani.save(f'plot/{func_str_table[fn]}/{func_str_table[fn]}_sa_path.gif', writer=writer)
+print(f"save to plot/{func_str_table[fn]}/{func_str_table[fn]}_msa_path.gif")
+ani.save(f'plot/{func_str_table[fn]}/{func_str_table[fn]}_msa_path.gif', writer=writer)
