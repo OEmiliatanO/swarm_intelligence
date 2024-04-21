@@ -16,13 +16,13 @@ CH::vector<double> neighbor(CH::vector<double>& X, size_t D, std::mt19937& eng, 
 {
     CH::vector<double> disturbance;
     disturbance.resize(D);
-    std::generate(disturbance.begin(), disturbance.end(), [&] { return sqrt(step) * distpm1(eng); } );
+    std::generate(disturbance.begin(), disturbance.end(), [&] { return step * distpm1(eng); } );
     CH::vector<double> res = X + disturbance;
     std::transform(res.begin(), res.end(), res.begin(), [&] (double x) { return std::max(xl, std::min(xu, x)); });
     return res;
 }
 
-double SA(size_t D, size_t k, double initT, double rt, double step, double xl, double xu, [[maybe_unused]] int fn = 1)
+double SA(size_t D, size_t k, double initT, double rt, double step_max, double step_min, double xl, double xu, [[maybe_unused]] int fn = 1)
 {
 #ifdef SAVE
     std::fstream fs;
@@ -35,6 +35,7 @@ double SA(size_t D, size_t k, double initT, double rt, double step, double xl, d
     CH::vector<double> gbest;
     double fgbest;
     double T = initT;
+    double step = step_max;
 
     /*  init  */
     std::random_device rnd_device;
@@ -57,7 +58,7 @@ double SA(size_t D, size_t k, double initT, double rt, double step, double xl, d
     {
         T *= rt;
         auto Snex = neighbor(S, D, eng, distpm1, xl, xu, step);
-        step *= rt;
+        step = step_max - (step_max - step_min) * i / (k-1);
         auto Enex = test_func(Snex);
         auto dT = Enex - E;
 
@@ -89,23 +90,25 @@ double SA(size_t D, size_t k, double initT, double rt, double step, double xl, d
 // --k iteration_num
 // --initT initial temperature
 // --rt decrease rate
-// --step length of step
+// --step_max smax
+// --step_min smin
 // --test_function fn
 // (k+1)*N <= D*10^4
-// ./main.elf --D 10 --k 10 --initT 10 --rt 0.5 --step 1 --test_function Ackley
+// ./main.elf --D 10 --k 10 --initT 10 --rt 0.5 --step_max 1 --step_min 0 --test_function Ackley
 int main([[maybe_unused]]int argc, char **argv)
 {
     using namespace std::chrono_literals;
 
     int D, k, fn;
-    double initT, rt, step;
+    double initT, rt, step_max, step_min;
 
     sscanf(argv[2], "%d", &D);
     sscanf(argv[4], "%d", &k);
     sscanf(argv[6], "%lf", &initT);
     sscanf(argv[8], "%lf", &rt);
-    sscanf(argv[10], "%lf", &step);
-    sscanf(argv[12], "%d", &fn);
+    sscanf(argv[10], "%lf", &step_max);
+    sscanf(argv[12], "%lf", &step_min);
+    sscanf(argv[14], "%d", &fn);
 
     switch(fn)
     {
@@ -147,7 +150,7 @@ int main([[maybe_unused]]int argc, char **argv)
         double xl = 0, xu = 30;
         set_search_bound(&xu, &xl, fn);
         auto st = std::chrono::steady_clock::now();
-        auto tmp_res = SA(D, k, initT, rt, step, xl, xu, fn);
+        auto tmp_res = SA(D, k, initT, rt, step_max, step_min, xl, xu, fn);
         auto ed = std::chrono::steady_clock::now();
         time_mean += ed - st;
 

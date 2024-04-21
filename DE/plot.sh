@@ -6,7 +6,7 @@ if [ "$1" == "Ackley" ] || [ "$1" == "1" ]
 then
     echo "Ackley"
     mkdir -p plot/Ackley
-    ./main.elf --N 1000 --D 2 --k 100 --m 0.5 --c 0.5 --test_function 1  > /dev/null
+    ./main.elf --N 1000 --D 2 --k 100 --m 0.3 --c 0.5 --test_function 1  > /dev/null
     python plot.py 1
 elif [ "$1" == "Rastrigin" ] || [ "$1" == "2" ]
 then 
@@ -30,19 +30,19 @@ elif [ "$1" == "Zakharov" ] || [ "$1" == "5" ]
 then
     echo "Zakharov"
     mkdir -p plot/Zakharov
-    ./main.elf --N 1000 --D 2 --k 100 --m 0.5 --c 0.5 --test_function 5  > /dev/null
+    ./main.elf --N 1000 --D 2 --k 100 --m 0.3 --c 0.5 --test_function 5  > /dev/null
     python plot.py 5
 elif [ "$1" == "Michalewicz" ] || [ "$1" == "6" ]
 then
     echo "Michalewicz"
     mkdir -p plot/Michalewicz
-    ./main.elf --N 1000 --D 2 --k 100 --m 0.5 --c 0.5 --test_function 6  > /dev/null
+    ./main.elf --N 1000 --D 2 --k 100 --m 0.3 --c 0.5 --test_function 6  > /dev/null
     python plot.py 6
 elif [ "$1" == "all" ] || [ "$1" == "-1" ]
 then
     echo "Ackley"
     mkdir -p plot/Ackley
-    ./main.elf --N 1000 --D 2 --k 100 --m 0.5 --c 0.5 --test_function 1  > /dev/null
+    ./main.elf --N 1000 --D 2 --k 100 --m 0.3 --c 0.5 --test_function 1  > /dev/null
     python plot.py 1
     
     echo "Rastrigin"
@@ -62,11 +62,11 @@ then
     
     echo "Zakharov"
     mkdir -p plot/Zakharov
-    ./main.elf --N 1000 --D 2 --k 100 --m 0.5 --c 0.5 --test_function 5  > /dev/null
+    ./main.elf --N 1000 --D 2 --k 100 --m 0.3 --c 0.5 --test_function 5  > /dev/null
     python plot.py 5
 
     echo "Michalewicz"
     mkdir -p plot/Michalewicz
-    ./main.elf --N 1000 --D 2 --k 100 --m 0.5 --c 0.5 --test_function 6  > /dev/null
+    ./main.elf --N 1000 --D 2 --k 100 --m 0.3 --c 0.5 --test_function 6  > /dev/null
     python plot.py 6
 fi
