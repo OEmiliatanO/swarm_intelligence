@@ -69,6 +69,7 @@ double DE(size_t N, size_t D, size_t k, double m, double c, double xl, double xu
             for (size_t j = 0; j < D; ++j)
             {
                 v[i][j] = (dist01(eng) <= c or j == randk ? v[i][j] : X[i][j]);
+                v[i][j] = std::max(std::min(xu, v[i][j]), xl);
             }
             auto fvi = test_func(v[i]);
             if (fvi < fpbest[i])
