@@ -43,7 +43,7 @@ with open(f"plot/{func_str_table[fn]}/{func_str_table[fn]}_path.txt") as f:
             if it > 0:
                 plt.plot([pX[i][it-1][0], pX[i][it][0]], [pX[i][it-1][1], pX[i][it][1]], c=c, linestyle='--', linewidth=1)
 
-plt.title('PSO Particle Path')
+plt.title('AccPSO Particle Path')
 plt.xlabel('X')
 plt.ylabel('Y')
 plt.grid(True)
@@ -52,6 +52,7 @@ plt.savefig(f'plot/{func_str_table[fn]}/{func_str_table[fn]}_accpso_plot.png')
 plt.close()
 
 plt.figure()
+plt.title('AccPSO')
 plt.xlabel('iteration')
 plt.ylabel('value')
 iteration = [i for i in range(k)]

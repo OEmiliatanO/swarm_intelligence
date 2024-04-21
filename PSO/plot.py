@@ -54,6 +54,7 @@ plt.savefig(f'plot/{func_str_table[fn]}/{func_str_table[fn]}_pso_plot.png')
 plt.close()
 
 plt.figure()
+plt.title('PSO')
 plt.xlabel('iteration')
 plt.ylabel('value')
 iteration = [i for i in range(k)]
