@@ -82,7 +82,7 @@ def update_scatter(frame):
             
     return tuple(points)
 
-ani = animation.FuncAnimation(fig, update_scatter, frames=len(pX), interval=800)
+ani = animation.FuncAnimation(fig, update_scatter, frames=len(pX), interval=1000)
 writer = animation.PillowWriter(fps=1,
                                 metadata=dict(artist='Me'),
                                 bitrate=1800)
