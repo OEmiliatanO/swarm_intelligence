@@ -36,7 +36,7 @@ bool operator<(const indv_t& lhs, const indv_t& rhs)
     return lhs.f < rhs.f;
 }
 
-std::vector<indv_t> split(const CH::vector<double>& st, const CH::vector<double>& ed, size_t n, size_t m)
+std::vector<indv_t> split(const CH::vector<double>& st, const CH::vector<double>& ed, size_t n, size_t m, double xl, double xu)
 {
     std::random_device rnd_device;
     std::mt19937 eng { rnd_device() };
@@ -62,9 +62,13 @@ std::vector<indv_t> split(const CH::vector<double>& st, const CH::vector<double>
         double step = (ed[i] - st[i]) / m;
         for (size_t j = 0; j < n; ++j)
         {
-            auto k = dist(eng);
-            vec[j].step[i] = (ed[i] - st[i]) * 1.5 / m;
-            vec[j].p[i] = ((st[i] + k * step) + (st[i] + (k+1) * step)) / 2;
+            do
+            {
+                auto k = dist(eng);
+                vec[j].step[i] = (ed[i] - st[i]) * 1.5 / m;
+                vec[j].p[i] = ((st[i] + k * step) + (st[i] + (k+1) * step)) / 2;
+                if (vec[j].p[i] > xu or vec[j].p[i] < xl) continue;
+            } while (false);
         }
     }
 
@@ -120,7 +124,7 @@ double SA(size_t N, size_t D, size_t max_eval, [[maybe_unused]]double m, [[maybe
     size_t it = 0, cnt = 0;
     while (qu.size() and cnt < max_eval)
     {
-        auto new_p = split(qu.top().st, qu.top().ed, N, m); qu.pop();
+        auto new_p = split(qu.top().st, qu.top().ed, N, m, xl, xu); qu.pop();
 
         for (size_t i = 0; i < new_p.size(); ++i)
         {
