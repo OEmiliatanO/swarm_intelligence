@@ -63,7 +63,7 @@ std::vector<indv_t> split(const CH::vector<double>& st, const CH::vector<double>
         for (size_t j = 0; j < n; ++j)
         {
             auto k = dist(eng);
-            vec[j].step[i] = (ed[i] - st[i]) / m;
+            vec[j].step[i] = (ed[i] - st[i]) * 1.1 / m;
             vec[j].p[i] = ((st[i] + k * step) + (st[i] + (k+1) * step)) / 2;
         }
     }
