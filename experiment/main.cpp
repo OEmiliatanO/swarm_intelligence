@@ -62,13 +62,14 @@ std::vector<indv_t> split(const CH::vector<double>& st, const CH::vector<double>
         double step = (ed[i] - st[i]) / m;
         for (size_t j = 0; j < n; ++j)
         {
-            do
+            while (true)
             {
                 auto k = dist(eng);
                 vec[j].step[i] = (ed[i] - st[i]) * 1.5 / m;
                 vec[j].p[i] = ((st[i] + k * step) + (st[i] + (k+1) * step)) / 2;
-                if (vec[j].p[i] > xu or vec[j].p[i] < xl) continue;
-            } while (false);
+                if (vec[j].p[i] <= xu and vec[j].p[i] >= xl) break;
+            }
+            //if (vec[j].p[i] > xu or vec[j].p[i] < xl) exit(1);
         }
     }
 
