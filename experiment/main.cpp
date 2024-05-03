@@ -78,8 +78,8 @@ area_t neighbor(const indv_t& center)
     area.ed.resize(center.p.size());
     for (size_t i = 0; i < center.p.size(); ++i)
     {
-        area.st[i] = center.p[i] - center.step[i] / 2;
-        area.ed[i] = center.p[i] + center.step[i] / 2;
+        area.st[i] = center.p[i] - center.step[i];
+        area.ed[i] = center.p[i] + center.step[i];
     }
     area.f = center.f;
     return area;
