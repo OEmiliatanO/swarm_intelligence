@@ -129,6 +129,19 @@ double Ackley(const std::vector<double>& x)
     return (-20.0) * exp(-0.2 * sqrt(sum1 / double(d))) - exp(sum2 / double(d)) + 20.0 + exp(1.0);
 }
 
+double shifted_Ackley(const CH::vector<double>& x)
+{
+    const size_t d = x.size();
+
+    double sum1 = 0.0, sum2 = 0.0;
+    for (size_t i = 0; i < d; ++i)
+    {
+        sum1 += (x[i] - 2) * (x[i] - 2);
+        sum2 += cos(2.0 * M_PI * (x[i] - 2));
+    }
+    return (-20.0) * exp(-0.2 * sqrt(sum1 / double(d))) - exp(sum2 / double(d)) + 20.0 + exp(1.0);
+}
+
 double Ackley(const CH::vector<double>& x)
 {
     const size_t d = x.size();
