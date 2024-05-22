@@ -120,7 +120,7 @@ int main([[maybe_unused]]int argc, char **argv)
     switch(fn)
     {
         case 1:
-            test_func = static_cast<double (*)(const CH::vector<double>&)>(&shifted_Ackley);
+            test_func = static_cast<double (*)(const CH::vector<double>&)>(&Ackley);
             break;
 
         case 2:
