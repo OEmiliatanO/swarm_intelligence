@@ -18,7 +18,7 @@ struct indv_t
     double f;
 
     indv_t() = default;
-    indv_t(const CH::vector<double>& _x, const double& _f): x(_x), f(_f);
+    indv_t(const CH::vector<double>& _x, const double& _f): x(_x), f(_f) {};
 };
 
 double DE(size_t N, size_t D, size_t k, double p, double c, double xl, double xu, [[maybe_unused]] int fn = 1)
@@ -44,7 +44,6 @@ double DE(size_t N, size_t D, size_t k, double p, double c, double xl, double xu
     std::uniform_real_distribution<double> dist01 {0, 1};
 
     double mu_cr = 0.5, mu_f = 0.5;
-    double mean_scr = 0.0, mean_sf = 0.0;
 
     fgbest = std::numeric_limits<double>::max();
     for (size_t i = 0; i < N; ++i)
@@ -79,20 +78,25 @@ double DE(size_t N, size_t D, size_t k, double p, double c, double xl, double xu
         for (size_t i = 0; i < N; ++i)
         {
             double CR = dist_n(eng), F = dist_c(eng);
+
+            CR = std::max(std::min(1., CR), 0.);
+            while (F <= 0.) F = dist_c(eng);
+            F = std::min(F, 1.);
+
             auto r1 = static_cast<size_t>(dist01(eng) * (N - 1)), 
                  r2 = static_cast<size_t>(dist01(eng) * (N + A.size() - 1));
 
             while (r1 == i) r1 = static_cast<size_t>(dist01(eng) * (N - 1));
             while (r2 == i or r2 == r1) r2 = static_cast<size_t>(dist01(eng) * (N + A.size() - 1));
 
-            const auto& X_pbest = P[static_cast<size_t>(dist01(eng) * (std::floor(N * p) - 1))].x;
+            const auto& X_pbest = P[static_cast<size_t>(dist01(eng) * (std::ceil(N * p) - 1))].x;
             const auto& X_ = (r2 >= N ? A[r2-N].x : P[r2].x);
             
             v[i].x = P[i].x + F * (X_pbest - P[i].x) + F * (P[r1].x - X_);
 
             const auto jrand = static_cast<size_t>(dist01(eng) * (D - 1));
             for (size_t j = 0; j < D; ++j)
-                v[i].x[j] = j == jrand or dist01(eng) < CR ? v[i].x[j] : P[i].x[j];
+                v[i].x[j] = (j == jrand or dist01(eng) < CR ? v[i].x[j] : P[i].x[j]);
 
             v[i].f = test_func(v[i].x);
 
@@ -105,6 +109,12 @@ double DE(size_t N, size_t D, size_t k, double p, double c, double xl, double xu
             }
             else
                 nexP[i].x = P[i].x, nexP[i].f = P[i].f;
+
+            if (fgbest > nexP[i].f)
+            {
+                gbest = nexP[i].x;
+                fgbest = nexP[i].f;
+            }
         }
 
         P.swap(nexP);
