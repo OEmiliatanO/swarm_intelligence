@@ -10,7 +10,7 @@
 
 double (*test_func)(const CH::vector<double>& X);
 
-std::string table[] = {"0", "Ackley", "Rastrigin", "HappyCat", "Rosenbrock", "Zakharov", "Michalewicz"};
+std::string table[] = {"0", "Ackley", "Rastrigin", "HappyCat", "Rosenbrock", "Zakharov", "Michalewicz", "Schwefel", "BentCigar", "DropWave", "Step"};
 
 CH::vector<double> neighbor(CH::vector<double>& X, size_t D, std::mt19937& eng, std::uniform_real_distribution<double> distpm1, double xl, double xu, double step)
 {
@@ -134,6 +134,22 @@ int main([[maybe_unused]]int argc, char **argv)
 
         case 6:
             test_func = static_cast<double (*)(const CH::vector<double>&)>(Michalewicz);
+            break;
+
+        case 7:
+            test_func = static_cast<double (*)(const CH::vector<double>&)>(Schwefel);
+            break;
+
+        case 8:
+            test_func = static_cast<double (*)(const CH::vector<double>&)>(BentCigar);
+            break;
+
+        case 9:
+            test_func = static_cast<double (*)(const CH::vector<double>&)>(DropWave);
+            break;
+
+        case 10:
+            test_func = static_cast<double (*)(const CH::vector<double>&)>(Step);
             break;
     }
 

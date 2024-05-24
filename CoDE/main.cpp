@@ -10,7 +10,7 @@
 
 double (*test_func)(const CH::vector<double>& X);
 
-std::string table[] = {"0", "Ackley", "Rastrigin", "HappyCat", "Rosenbrock", "Zakharov", "Michalewicz"};
+std::string table[] = {"0", "Ackley", "Rastrigin", "HappyCat", "Rosenbrock", "Zakharov", "Michalewicz", "Schwefel", "BentCigar", "DropWave", "Step"};
 
 double DE(size_t N, size_t D, size_t k, double xl, double xu, [[maybe_unused]] int fn = 1)
 {
@@ -77,7 +77,10 @@ double DE(size_t N, size_t D, size_t k, double xl, double xu, [[maybe_unused]] i
             u1.resize(D);
             auto randj = static_cast<size_t>(dist01(eng) * (N - 1));
             for (size_t j = 0; j < D; ++j)
+            {
                 u1[j] = dist01(eng) < c or j == randj ? X[r1][j] + m * (X[r2][j] - X[r3][j]) : X[i][j];
+                u1[j] = std::max(std::min(xu, u1[j]), xl);
+            }
 
             q = dist13(eng);
             if (q == 1)      m = 1, c = 0.1;
@@ -88,7 +91,10 @@ double DE(size_t N, size_t D, size_t k, double xl, double xu, [[maybe_unused]] i
             u2.resize(D);
             randj = static_cast<size_t>(dist01(eng) * (N - 1));
             for (size_t j = 0; j < D; ++j)
+            {
                 u2[j] = dist01(eng) < c or j == randj ? X[r1][j] + m * (X[r2][j] - X[r3][j]) + m * (X[r4][j] - X[r5][j]) : X[i][j];
+                u2[j] = std::max(std::min(xu, u2[j]), xl);
+            }
 
             q = dist13(eng);
             if (q == 1)      m = 1, c = 0.1;
@@ -96,6 +102,8 @@ double DE(size_t N, size_t D, size_t k, double xl, double xu, [[maybe_unused]] i
             else             m = 0.8, c = 0.2;
 
             CH::vector<double> u3 = X[i] + dist01(eng) * (X[r1] - X[i])  + m * (X[r2] - X[r3]);
+            for (size_t j = 0; j < D; ++j)
+                u3[j] = std::max(std::min(xu, u3[j]), xl);
 
             double f1 = test_func(u1);
             double f2 = test_func(u2);
@@ -172,6 +180,22 @@ int main([[maybe_unused]]int argc, char **argv)
 
         case 6:
             test_func = static_cast<double (*)(const CH::vector<double>&)>(Michalewicz);
+            break;
+
+        case 7:
+            test_func = static_cast<double (*)(const CH::vector<double>&)>(Schwefel);
+            break;
+
+        case 8:
+            test_func = static_cast<double (*)(const CH::vector<double>&)>(BentCigar);
+            break;
+
+        case 9:
+            test_func = static_cast<double (*)(const CH::vector<double>&)>(DropWave);
+            break;
+
+        case 10:
+            test_func = static_cast<double (*)(const CH::vector<double>&)>(Step);
             break;
     }
 

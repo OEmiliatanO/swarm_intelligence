@@ -45,6 +45,42 @@ then
     ./main.elf --N 1000 --D 2 --k 100 --vmax 2 --c1 1 --c2 0.2 --test_function 6  > result/Michalewicz/Michalewicz_2D.txt
     ./main.elf --N 1000 --D 10 --k 1000 --vmax 2 --c1 1 --c2 0.2 --test_function 6 > result/Michalewicz/Michalewicz_10D.txt
     ./main.elf --N 1000 --D 30 --k 1000 --vmax 2 --c1 1 --c2 0.2 --test_function 6 > result/Michalewicz/Michalewicz_30D.txt
+elif [ "$1" == "Schwefel" ] || [ "$1" == "7" ]
+then
+    FN="Schwefel"
+
+    echo ${FN}
+    mkdir -p result/${FN}/
+    ./main.elf --N 1000 --D 2 --k 100 --vmax 1 --c1 1 --c2 0.2 --test_function 7  > result/${FN}/${FN}_2D.txt
+    ./main.elf --N 1000 --D 10 --k 1000 --vmax 1 --c1 1 --c2 0.2 --test_function 7 > result/${FN}/${FN}_10D.txt
+    ./main.elf --N 1000 --D 30 --k 3000 --vmax 1 --c1 1 --c2 0.2 --test_function 7 > result/${FN}/${FN}_30D.txt
+elif [ "$1" == "BentCigar" ] || [ "$1" == "8" ]
+then
+    FN="BentCigar"
+
+    echo ${FN}
+    mkdir -p result/${FN}/
+    ./main.elf --N 1000 --D 2 --k 200 --vmax 1 --c1 0.8 --c2 0.5 --test_function 8  > result/${FN}/${FN}_2D.txt
+    ./main.elf --N 1000 --D 10 --k 1000 --vmax 1 --c1 0.8 --c2 0.5 --test_function 8 > result/${FN}/${FN}_10D.txt
+    ./main.elf --N 1000 --D 30 --k 5000 --vmax 1 --c1 0.8 --c2 0.5 --test_function 8 > result/${FN}/${FN}_30D.txt
+elif [ "$1" == "DropWave" ] || [ "$1" == "9" ]
+then
+    FN="DropWave"
+
+    echo ${FN}
+    mkdir -p result/${FN}/
+    ./main.elf --N 1000 --D 2 --k 100 --vmax 2 --c1 1 --c2 0.2 --test_function 9  > result/${FN}/${FN}_2D.txt
+    ./main.elf --N 1000 --D 10 --k 100 --vmax 2 --c1 1 --c2 0.2 --test_function 9 > result/${FN}/${FN}_10D.txt
+    ./main.elf --N 1000 --D 30 --k 1000 --vmax 2 --c1 1 --c2 0.2 --test_function 9 > result/${FN}/${FN}_30D.txt
+elif [ "$1" == "Step" ] || [ "$1" == "10" ]
+then
+    FN="Step"
+
+    echo ${FN}
+    mkdir -p result/${FN}/
+    ./main.elf --N 1000 --D 2 --k 200 --vmax 2 --c1 1 --c2 0.2 --test_function 10  > result/${FN}/${FN}_2D.txt
+    ./main.elf --N 1000 --D 10 --k 400 --vmax 2 --c1 1 --c2 0.2 --test_function 10 > result/${FN}/${FN}_10D.txt
+    ./main.elf --N 1000 --D 30 --k 800 --vmax 2 --c1 1 --c2 0.2 --test_function 10 > result/${FN}/${FN}_30D.txt
 elif [ "$1" == "all" ] || [ "$1" == "-1" ]
 then
     echo "Ackley"
@@ -82,4 +118,32 @@ then
     ./main.elf --N 1000 --D 2 --k 100 --vmax 2 --c1 1 --c2 0.2 --test_function 6  > result/Michalewicz/Michalewicz_2D.txt
     ./main.elf --N 1000 --D 10 --k 1000 --vmax 2 --c1 1 --c2 0.2 --test_function 6 > result/Michalewicz/Michalewicz_10D.txt
     ./main.elf --N 1000 --D 30 --k 1000 --vmax 2 --c1 1 --c2 0.2 --test_function 6 > result/Michalewicz/Michalewicz_30D.txt
+
+    FN="Schwefel"
+    echo ${FN}
+    mkdir -p result/${FN}/
+    ./main.elf --N 1000 --D 2 --k 100 --vmax 1 --c1 1 --c2 0.2 --test_function 7  > result/${FN}/${FN}_2D.txt
+    ./main.elf --N 1000 --D 10 --k 1000 --vmax 1 --c1 1 --c2 0.2 --test_function 7 > result/${FN}/${FN}_10D.txt
+    ./main.elf --N 1000 --D 30 --k 3000 --vmax 1 --c1 1 --c2 0.2 --test_function 7 > result/${FN}/${FN}_30D.txt
+
+    FN="BentCigar"
+    echo ${FN}
+    mkdir -p result/${FN}/
+    ./main.elf --N 1000 --D 2 --k 200 --vmax 1 --c1 0.8 --c2 0.5 --test_function 8  > result/${FN}/${FN}_2D.txt
+    ./main.elf --N 1000 --D 10 --k 1000 --vmax 1 --c1 0.8 --c2 0.5 --test_function 8 > result/${FN}/${FN}_10D.txt
+    ./main.elf --N 1000 --D 30 --k 5000 --vmax 1 --c1 0.8 --c2 0.5 --test_function 8 > result/${FN}/${FN}_30D.txt
+
+    FN="DropWave"
+    echo ${FN}
+    mkdir -p result/${FN}/
+    ./main.elf --N 1000 --D 2 --k 100 --vmax 2 --c1 1 --c2 0.2 --test_function 9  > result/${FN}/${FN}_2D.txt
+    ./main.elf --N 1000 --D 10 --k 100 --vmax 2 --c1 1 --c2 0.2 --test_function 9 > result/${FN}/${FN}_10D.txt
+    ./main.elf --N 1000 --D 30 --k 1000 --vmax 2 --c1 1 --c2 0.2 --test_function 9 > result/${FN}/${FN}_30D.txt
+
+    FN="Step"
+    echo ${FN}
+    mkdir -p result/${FN}/
+    ./main.elf --N 1000 --D 2 --k 200 --vmax 2 --c1 1 --c2 0.2 --test_function 10  > result/${FN}/${FN}_2D.txt
+    ./main.elf --N 1000 --D 10 --k 400 --vmax 2 --c1 1 --c2 0.2 --test_function 10 > result/${FN}/${FN}_10D.txt
+    ./main.elf --N 1000 --D 30 --k 800 --vmax 2 --c1 1 --c2 0.2 --test_function 10 > result/${FN}/${FN}_30D.txt
 fi

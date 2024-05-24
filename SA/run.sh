@@ -45,6 +45,42 @@ then
     ./main.elf --D 2 --k 20000 --initT 30 --rt 0.999 --step_max 2 --step_min 0 --test_function 6  > result/Michalewicz/Michalewicz_2D.txt
     ./main.elf --D 10 --k 20000 --initT 30 --rt 0.999 --step_max 2 --step_min 0 --test_function 6 > result/Michalewicz/Michalewicz_10D.txt
     ./main.elf --D 30 --k 300000 --initT 30 --rt 0.999 --step_max 2 --step_min 0 --test_function 6 > result/Michalewicz/Michalewicz_30D.txt
+elif [ "$1" == "Schwefel" ] || [ "$1" == "7" ]
+then
+    FN="Schwefel"
+
+    echo ${FN}
+    mkdir -p result/${FN}/
+    ./main.elf --D 2 --k 20000 --initT 100 --rt 0.999 --step_max 2 --step_min 0 --test_function 7  > result/${FN}/${FN}_2D.txt
+    ./main.elf --D 10 --k 100000 --initT 100 --rt 0.999 --step_max 2 --step_min 0 --test_function 7 > result/${FN}/${FN}_10D.txt
+    ./main.elf --D 30 --k 300000 --initT 100 --rt 0.999 --step_max 2 --step_min 0 --test_function 7 > result/${FN}/${FN}_30D.txt
+elif [ "$1" == "BentCigar" ] || [ "$1" == "8" ]
+then
+    FN="BentCigar"
+
+    echo ${FN}
+    mkdir -p result/${FN}/
+    ./main.elf --D 2 --k 20000 --initT 30 --rt 0.999 --step_max 2 --step_min 0 --test_function 8  > result/${FN}/${FN}_2D.txt
+    ./main.elf --D 10 --k 100000 --initT 30 --rt 0.999 --step_max 2 --step_min 0 --test_function 8 > result/${FN}/${FN}_10D.txt
+    ./main.elf --D 30 --k 300000 --initT 30 --rt 0.999 --step_max 2 --step_min 0 --test_function 8 > result/${FN}/${FN}_30D.txt
+elif [ "$1" == "DropWave" ] || [ "$1" == "9" ]
+then
+    FN="DropWave"
+
+    echo ${FN}
+    mkdir -p result/${FN}/
+    ./main.elf --D 2 --k 20000 --initT 30 --rt 0.999 --step_max 2 --step_min 0 --test_function 9  > result/${FN}/${FN}_2D.txt
+    ./main.elf --D 10 --k 100000 --initT 30 --rt 0.999 --step_max 2 --step_min 0 --test_function 9 > result/${FN}/${FN}_10D.txt
+    ./main.elf --D 30 --k 300000 --initT 30 --rt 0.999 --step_max 2 --step_min 0 --test_function 9 > result/${FN}/${FN}_30D.txt
+elif [ "$1" == "Step" ] || [ "$1" == "10" ]
+then
+    FN="Step"
+
+    echo ${FN}
+    mkdir -p result/${FN}/
+    ./main.elf --D 2 --k 20000 --initT 30 --rt 0.999 --step_max 1 --step_min 0 --test_function 10  > result/${FN}/${FN}_2D.txt
+    ./main.elf --D 10 --k 100000 --initT 30 --rt 0.999 --step_max 1 --step_min 0 --test_function 10 > result/${FN}/${FN}_10D.txt
+    ./main.elf --D 30 --k 300000 --initT 30 --rt 0.999 --step_max 1 --step_min 0 --test_function 10 > result/${FN}/${FN}_30D.txt
 elif [ "$1" == "all" ] || [ "$1" == "-1" ]
 then
     echo "Ackley"
@@ -82,4 +118,32 @@ then
     ./main.elf --D 2 --k 20000 --initT 30 --rt 0.999 --step_max 2 --step_min 0 --test_function 6  > result/Michalewicz/Michalewicz_2D.txt
     ./main.elf --D 10 --k 20000 --initT 30 --rt 0.999 --step_max 2 --step_min 0 --test_function 6 > result/Michalewicz/Michalewicz_10D.txt
     ./main.elf --D 30 --k 300000 --initT 30 --rt 0.999 --step_max 2 --step_min 0 --test_function 6 > result/Michalewicz/Michalewicz_30D.txt
+
+    FN="Schwefel"
+    echo ${FN}
+    mkdir -p result/${FN}/
+    ./main.elf --D 2 --k 20000 --initT 100 --rt 0.999 --step_max 2 --step_min 0 --test_function 7  > result/${FN}/${FN}_2D.txt
+    ./main.elf --D 10 --k 100000 --initT 100 --rt 0.999 --step_max 2 --step_min 0 --test_function 7 > result/${FN}/${FN}_10D.txt
+    ./main.elf --D 30 --k 300000 --initT 100 --rt 0.999 --step_max 2 --step_min 0 --test_function 7 > result/${FN}/${FN}_30D.txt
+
+    FN="BentCigar"
+    echo ${FN}
+    mkdir -p result/${FN}/
+    ./main.elf --D 2 --k 20000 --initT 30 --rt 0.999 --step_max 2 --step_min 0 --test_function 8  > result/${FN}/${FN}_2D.txt
+    ./main.elf --D 10 --k 100000 --initT 30 --rt 0.999 --step_max 2 --step_min 0 --test_function 8 > result/${FN}/${FN}_10D.txt
+    ./main.elf --D 30 --k 300000 --initT 30 --rt 0.999 --step_max 2 --step_min 0 --test_function 8 > result/${FN}/${FN}_30D.txt
+
+    FN="DropWave"
+    echo ${FN}
+    mkdir -p result/${FN}/
+    ./main.elf --D 2 --k 20000 --initT 30 --rt 0.999 --step_max 2 --step_min 0 --test_function 9  > result/${FN}/${FN}_2D.txt
+    ./main.elf --D 10 --k 100000 --initT 30 --rt 0.999 --step_max 2 --step_min 0 --test_function 9 > result/${FN}/${FN}_10D.txt
+    ./main.elf --D 30 --k 300000 --initT 30 --rt 0.999 --step_max 2 --step_min 0 --test_function 9 > result/${FN}/${FN}_30D.txt
+
+    FN="Step"
+    echo ${FN}
+    mkdir -p result/${FN}/
+    ./main.elf --D 2 --k 20000 --initT 30 --rt 0.999 --step_max 1 --step_min 0 --test_function 10  > result/${FN}/${FN}_2D.txt
+    ./main.elf --D 10 --k 100000 --initT 30 --rt 0.999 --step_max 1 --step_min 0 --test_function 10 > result/${FN}/${FN}_10D.txt
+    ./main.elf --D 30 --k 300000 --initT 30 --rt 0.999 --step_max 1 --step_min 0 --test_function 10 > result/${FN}/${FN}_30D.txt
 fi

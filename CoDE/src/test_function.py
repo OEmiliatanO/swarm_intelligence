@@ -40,9 +40,27 @@ def Michalewicz(x):
     temp1 = np.sin(x) * np.power(np.sin((y * x * x) / np.pi), 20)
     return -np.sum(temp1)
 
-function_table = {1:Ackley, 2:Rastrigin, 3:HappyCat, 4:Rosenbrock, 5:Zakharov, 6:Michalewicz}
-func_str_table = {1:"Ackley", 2:"Rastrigin", 3:"HappyCat", 4:"Rosenbrock", 5:"Zakharov", 6:"Michalewicz"}
-search_range = {1:[-32.768, 32.768], 2:[-5.12, 5.12], 3:[-20.0, 20.0], 4:[-10.0, 10.0], 5:[-10.0, 10.0], 6:[0.0, np.pi]}
+def Schwefel(x):
+    x = np.array(x)
+    temp1 = x * np.sin(np.sqrt(np.abs(x)))
+    return 418.9829 * len(x) - np.sum(temp1)
+
+def BentCigar(x):
+    x = np.array(x)
+    temp1 = x * x
+    return temp1[0] + pow(10.0, 6) * np.sum(temp1[1:])
+
+def DropWave(x):
+    x = np.array(x)
+    temp1 = np.dot(x, x)
+    return 1.0 - ((1.0 + np.cos(12.0 * np.sqrt(temp1))) / (0.5 * temp1 + 2.0))
+
+def Step(x):
+    x = np.array([i + 0.5 for i in x])
+    return np.sum(np.floor(x) * np.floor(x))
+
+function_table = {1:Ackley, 2:Rastrigin, 3:HappyCat, 4:Rosenbrock, 5:Zakharov, 6:Michalewicz, 7:Schwefel, 8:BentCigar, 9:DropWave, 10:Step}
+search_range = {1:[-32.768, 32.768], 2:[-5.12, 5.12], 3:[-20.0, 20.0], 4:[-10.0, 10.0], 5:[-10.0, 10.0], 6:[0.0, np.pi],7:[-500,500],8:[-100,100],9:[-5.12, 5.12],10:[-100,100]}
 
 
 def cal_function_objective(x, func_num):
@@ -50,4 +68,3 @@ def cal_function_objective(x, func_num):
 
 def set_search_range(func_num):
     return search_range[func_num][0], search_range[func_num][1]
-

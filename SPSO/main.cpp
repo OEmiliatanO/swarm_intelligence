@@ -10,7 +10,7 @@
 
 double (*test_func)(const CH::vector<double>& X);
 
-std::string table[] = {"0", "Ackley", "Rastrigin", "HappyCat", "Rosenbrock", "Zakharov", "Michalewicz"};
+std::string table[] = {"0", "Ackley", "Rastrigin", "HappyCat", "Rosenbrock", "Zakharov", "Michalewicz", "Schwefel", "BentCigar", "DropWave", "Step"};
 
 double PSO(size_t N, size_t D, size_t k, double vmax, double c1, double c2, double xl, double xu, double vl = 0.001, double vu = 1,[[maybe_unused]] int fn = 1)
 {
@@ -167,6 +167,22 @@ int main([[maybe_unused]]int argc, char **argv)
 
         case 6:
             test_func = static_cast<double (*)(const CH::vector<double>&)>(Michalewicz);
+            break;
+
+        case 7:
+            test_func = static_cast<double (*)(const CH::vector<double>&)>(Schwefel);
+            break;
+
+        case 8:
+            test_func = static_cast<double (*)(const CH::vector<double>&)>(BentCigar);
+            break;
+
+        case 9:
+            test_func = static_cast<double (*)(const CH::vector<double>&)>(DropWave);
+            break;
+
+        case 10:
+            test_func = static_cast<double (*)(const CH::vector<double>&)>(Step);
             break;
     }
 

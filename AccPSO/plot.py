@@ -5,8 +5,8 @@ import matplotlib.animation as animation
 from src import test_function as tfn
 import sys
 
-func_str_table = {1:"Ackley", 2:"Rastrigin", 3:"HappyCat", 4:"Rosenbrock", 5:"Zakharov", 6:"Michalewicz"}
-search_range = {1:[-32.768, 32.768], 2:[-5.12, 5.12], 3:[-20.0, 20.0], 4:[-10.0, 10.0], 5:[-10.0, 10.0], 6:[0.0, np.pi]}
+search_range = {1:[-32.768, 32.768], 2:[-5.12, 5.12], 3:[-20.0, 20.0], 4:[-10.0, 10.0], 5:[-10.0, 10.0], 6:[0.0, np.pi],7:[-500,500],8:[-100,100],9:[-5.12, 5.12],10:[-100,100]}
+func_str_table = {1:"Ackley", 2:"Rastrigin", 3:"HappyCat", 4:"Rosenbrock", 5:"Zakharov", 6:"Michalewicz", 7:"Schwefel", 8:"BentCigar", 9:"DropWave", 10:"Step"}
 
 fn = int(sys.argv[1])
 x = np.linspace(search_range[fn][0], search_range[fn][1], 100)
@@ -68,7 +68,7 @@ ax.set_ylim(search_range[fn][0], search_range[fn][1])
 
 points = []
 for i in range(10):
-    points.append(ax.scatter(pX[i][0][0], pX[i][0][1]))
+    points.append(ax.scatter(pX[i][0][0], pX[i][0][1], zorder=10))
 
 def update_scatter(frame):
     it = frame
@@ -78,7 +78,7 @@ def update_scatter(frame):
     return tuple(points)
 
 ani = animation.FuncAnimation(fig, update_scatter, frames=k, interval=200)
-writer = animation.PillowWriter(fps=15,
+writer = animation.PillowWriter(fps=5,
                                 metadata=dict(artist='Me'),
                                 bitrate=1800)
 

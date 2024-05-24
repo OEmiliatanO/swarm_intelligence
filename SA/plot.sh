@@ -39,6 +39,38 @@ then
     mkdir -p plot/Michalewicz
     ./main.elf --D 2 --k 20000 --initT 30 --rt 0.999 --step_max 2 --step_min 0 --test_function 6 > /dev/null
     python plot.py 6
+elif [ "$1" == "Schwefel" ] || [ "$1" == "7" ]
+then
+    FN="Schwefel"
+
+    echo ${FN}
+    mkdir -p plot/${FN}
+    ./main.elf --D 2 --k 20000 --initT 30 --rt 0.999 --step_max 2 --step_min 0 --test_function 7  > /dev/null
+    python plot.py 7
+elif [ "$1" == "BentCigar" ] || [ "$1" == "8" ]
+then
+    FN="BentCigar"
+
+    echo ${FN}
+    mkdir -p plot/${FN}
+    ./main.elf --D 2 --k 20000 --initT 30 --rt 0.999 --step_max 2 --step_min 0 --test_function 8  > /dev/null
+    python plot.py 8
+elif [ "$1" == "DropWave" ] || [ "$1" == "9" ]
+then
+    FN="DropWave"
+
+    echo ${FN}
+    mkdir -p plot/${FN}
+    ./main.elf --D 2 --k 20000 --initT 30 --rt 0.999 --step_max 2 --step_min 0 --test_function 9  > /dev/null
+    python plot.py 9
+elif [ "$1" == "Step" ] || [ "$1" == "10" ]
+then
+    FN="Step"
+
+    echo ${FN}
+    mkdir -p plot/${FN}
+    ./main.elf --D 2 --k 20000 --initT 30 --rt 0.999 --step_max 2 --step_min 0 --test_function 10  > /dev/null
+    python plot.py 10
 elif [ "$1" == "all" ] || [ "$1" == "-1" ]
 then
     echo "Ackley"
@@ -70,4 +102,28 @@ then
     mkdir -p plot/Michalewicz
     ./main.elf --D 2 --k 20000 --initT 30 --rt 0.999 --step_max 2 --step_min 0 --test_function 6 > /dev/null
     python plot.py 6
+
+    FN="Schwefel"
+    echo ${FN}
+    mkdir -p plot/${FN}
+    ./main.elf --D 2 --k 20000 --initT 30 --rt 0.999 --step_max 2 --step_min 0 --test_function 7  > /dev/null
+    python plot.py 7
+
+    FN="BentCigar"
+    echo ${FN}
+    mkdir -p plot/${FN}
+    ./main.elf --D 2 --k 20000 --initT 30 --rt 0.999 --step_max 2 --step_min 0 --test_function 8  > /dev/null
+    python plot.py 8
+
+    FN="DropWave"
+    echo ${FN}
+    mkdir -p plot/${FN}
+    ./main.elf --D 2 --k 20000 --initT 30 --rt 0.999 --step_max 2 --step_min 0 --test_function 9  > /dev/null
+    python plot.py 9
+
+    FN="Step"
+    echo ${FN}
+    mkdir -p plot/${FN}
+    ./main.elf --D 2 --k 20000 --initT 30 --rt 0.999 --step_max 2 --step_min 0 --test_function 10  > /dev/null
+    python plot.py 10
 fi
