@@ -82,7 +82,7 @@ ax.set_ylim(search_range[fn][0], search_range[fn][1])
 
 points = []
 #points.append(ax.scatter(gbest_pruned[0][0], gbest_pruned[0][1]))
-points.append(ax.scatter(S_pruned[0][0], S_pruned[0][1]))
+points.append(ax.scatter(S_pruned[0][0], S_pruned[0][1], zorder=10))
 
 def update_scatter(frame):
     it = frame

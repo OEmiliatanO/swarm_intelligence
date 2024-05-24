@@ -68,7 +68,7 @@ ax.set_ylim(search_range[fn][0], search_range[fn][1])
 
 points = []
 for i in range(10):
-    points.append(ax.scatter(pX[i][0][0], pX[i][0][1]))
+    points.append(ax.scatter(pX[i][0][0], pX[i][0][1], zorder=10))
 
 def update_scatter(frame):
     it = frame
