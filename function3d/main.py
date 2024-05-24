@@ -4,8 +4,8 @@ from mpl_toolkits.mplot3d import Axes3D
 import test_function as tfn
 import sys
 
-func_str_table = {1:"Ackley", 2:"Rastrigin", 3:"HappyCat", 4:"Rosenbrock", 5:"Zakharov", 6:"Michalewicz"}
-search_range = {1:[-32.768/5, 32.768/5], 2:[-5.12, 5.12], 3:[-20.0/2, 20.0/2], 4:[-10.0, 10.0], 5:[-10.0, 10.0], 6:[0.0, np.pi]}
+search_range = {1:[-32.768/5, 32.768/5], 2:[-5.12, 5.12], 3:[-20.0/2, 20.0/2], 4:[-10.0, 10.0], 5:[-10.0, 10.0], 6:[0.0, np.pi], 7:[-500,500], 8:[-100,100], 9:[-5.12, 5.12], 10:[-100,100]}
+func_str_table = {1:"Ackley", 2:"Rastrigin", 3:"HappyCat", 4:"Rosenbrock", 5:"Zakharov", 6:"Michalewicz", 7:"Schwefel", 8:"BentCigar", 9:"DropWave", 10:"Step"}
 
 fn = int(sys.argv[1])
 
