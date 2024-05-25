@@ -52,7 +52,7 @@ plt.savefig(f'plot/{func_str_table[fn]}/{func_str_table[fn]}_jade_plot.png')
 plt.close()
 
 plt.figure()
-plt.title('DE')
+plt.title('JADE')
 plt.xlabel('iteration')
 plt.ylabel('value')
 iteration = [i for i in range(k)]

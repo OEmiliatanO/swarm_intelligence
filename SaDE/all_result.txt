@@ -68,3 +68,13 @@ Schwefel in 2: 2.5455132345086895e-05 ± 0
 BentCigar in 2: 4.947955994248191e-16 ± 0
 DropWave in 2: 1.3041812074732206e-10 ± 0
 Step in 2: 0 ± 0
+Ackley in 2: 3.7441738598431584e-10 ± 0
+Rastrigin in 2: 0 ± 0
+HappyCat in 2: 0.03932794378230181 ± 0
+Rosenbrock in 2: 1.694011194915896e-11 ± 0
+Zakharov in 2: 4.0402764847268515e-19 ± 0
+Michalewicz in 2: -1.8013034100985537 ± 0
+Schwefel in 2: 2.5455132345086895e-05 ± 0
+BentCigar in 2: 1.0312302038042485e-14 ± 0
+DropWave in 2: 5.668583380469272e-10 ± 0
+Step in 2: 0 ± 0
