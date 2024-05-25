@@ -43,7 +43,7 @@ with open(f"plot/{func_str_table[fn]}/{func_str_table[fn]}_path.txt") as f:
             if it > 0:
                 plt.plot([pX[i][it-1][0], pX[i][it][0]], [pX[i][it-1][1], pX[i][it][1]], c=c, linestyle='--', linewidth=1)
 
-plt.title('DE population Path')
+plt.title('SaDE population Path')
 plt.xlabel('X')
 plt.ylabel('Y')
 plt.grid(True)

@@ -28,3 +28,13 @@ DropWave in 30: 0.10389241712761728 ± 0.0665473280271386
 Step in 2: 0 ± 0
 Step in 10: 0 ± 0
 Step in 30: 0 ± 0
+Ackley in 2: 2.390479370006915e-09 ± 0
+Rastrigin in 2: 0 ± 0
+HappyCat in 2: 0.03940043468939791 ± 0
+Rosenbrock in 2: 3.3156928877889955e-13 ± 0
+Zakharov in 2: 8.079910550189477e-14 ± 0
+Michalewicz in 2: -1.8013034100985537 ± 0
+Schwefel in 2: 2.545513257246057e-05 ± 0
+BentCigar in 2: 2.1344309927995247e-13 ± 0
+DropWave in 2: 0.00033730411622712175 ± 0
+Step in 2: 0 ± 0
