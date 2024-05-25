@@ -80,7 +80,7 @@ then
     mkdir -p result/${FN}/
     ./main.elf --N 1000 --D 2 --k 2 --alpha 0.2 --beta 0.8 --gamma 0.8 --L 2 --test_function 10  > result/${FN}/${FN}_2D.txt
     ./main.elf --N 1000 --D 10 --k 5 --alpha 0.2 --beta 0.8 --gamma 0.8 --L 2 --test_function 10 > result/${FN}/${FN}_10D.txt
-    ./main.elf --N 1000 --D 30 --k 5 --alpha 0.2 --beta 0.8 --gamma 0.8 --L 2 --test_function 10 > result/${FN}/${FN}_30D.txt
+    ./main.elf --N 1000 --D 30 --k 5 --alpha 2 --beta 0.8 --gamma 0.8 --L 20 --test_function 10 > result/${FN}/${FN}_30D.txt
 elif [ "$1" == "all" ] || [ "$1" == "-1" ]
 then
     echo "Ackley"
