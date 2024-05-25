@@ -20,7 +20,8 @@ double DE(size_t N, size_t D, size_t k, double xl, double xu, [[maybe_unused]] i
     fs << std::format("{} {} {}", N, D, k) << std::endl;
 #endif
 
-    CH::vector<double> X[N];
+    std::vector<CH::vector<double>> X, nexX;
+    X.resize(N), nexX.resize(N);
     double fp[N];
     CH::vector<double> gbest;
     double fgbest, p1 = 0.5;
@@ -106,7 +107,7 @@ double DE(size_t N, size_t D, size_t k, double xl, double xu, [[maybe_unused]] i
 
             if (fvi < fp[i])
             {
-                X[i] = v[i];
+                nexX[i] = v[i];
                 fp[i] = fvi;
                 
                 if (current_strategy == 1)
@@ -116,19 +117,30 @@ double DE(size_t N, size_t D, size_t k, double xl, double xu, [[maybe_unused]] i
 
                 sucessful_c.emplace_back(c[i]);
             }
-            if (fgbest > fp[i])
+            else
             {
-                gbest = X[i];
-                fgbest = fp[i];
-
+                nexX[i] = X[i];
                 if (current_strategy == 1)
                     ++nf1;
                 else
                     ++nf2;
             }
-            
-            p1 = ns1 * (ns2 + nf2) / (ns2 * (ns1 + nf1) + ns1 * (ns2 + nf2));
+
+            if (fgbest > fp[i])
+            {
+                gbest = X[i];
+                fgbest = fp[i];
+            }
         }
+
+        if ((ns2 * (ns1 + nf1) + ns1 * (ns2 + nf2)) == 0)
+            p1 = 1;
+        else
+            p1 = ns1 * (ns2 + nf2) / (ns2 * (ns1 + nf1) + ns1 * (ns2 + nf2));
+        ns1 = ns2 = nf1 = nf2 = 0;
+
+        X.swap(nexX);
+        
         for (size_t i = 0; i < N; ++i)
         {
 #ifdef SAVE

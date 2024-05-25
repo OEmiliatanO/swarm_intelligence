@@ -69,6 +69,8 @@ double DE(size_t N, size_t D, size_t k, double p, double c, double xl, double xu
     {
         std::vector<indv_t> v;
         v.resize(N);
+        
+        SCR.clear(), SF.clear();
 
         std::normal_distribution<double> dist_n {mu_cr, 0.1};
         std::cauchy_distribution<double> dist_c {mu_f,  0.1};
